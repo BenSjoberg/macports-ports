@@ -1,0 +1,22 @@
+--- Makefile.am.orig	2016-12-13 23:18:22.000000000 -0600
++++ Makefile.am	2016-12-13 23:18:31.000000000 -0600
+@@ -13,7 +13,7 @@
+ 	std-options \
+ 	-Wall
+ 
+-SUBDIRS = po doc compat src rdnssd
++SUBDIRS = po doc compat src
+ DIST_SUBDIRS = m4 $(SUBDIRS)
+ noinst_HEADERS = include/gettext.h
+ 
+--- doc/Makefile.am.orig	2016-12-13 23:23:28.000000000 -0600
++++ doc/Makefile.am	2011-09-22 11:12:13.000000000 -0500
+@@ -4,7 +4,7 @@
+ # This file is distributed under the same license as the ndisc6 package.
+ 
+ man1_MANS = addr2name.1 dnssort.1 tcpspray.1
+-man8_MANS = ndisc6.8 rdisc6.8 rltraceroute6.8 rdnssd.8
++man8_MANS = ndisc6.8 rdisc6.8 rltraceroute6.8
+ SOURCES_MAN = \
+ 	ndisc6.8 rdisc6.8 \
+ 	rltraceroute6.8 \

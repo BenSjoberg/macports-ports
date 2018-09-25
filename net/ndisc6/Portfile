@@ -1,0 +1,36 @@
+PortSystem                1.0
+name                      ndisc6
+version                   1.0.3
+categories                net
+platforms                 darwin
+maintainers               bensjoberg \
+                          openmaintainer
+description               IPv6 diagnostic tools
+long_description          This package gathers a few diagnostic tools for IPv6 networks:\n\
+                          - ndisc6, which performs ICMPv6 Neighbor Discovery in userland,\n\
+                          - rdisc6, which performs ICMPv6 Router Discovery in userland,\n\
+                          - rltraceroute6, yet another IPv6 implementation of traceroute,\n\
+                          - tcptraceroute6, a TCP/IPv6-based traceroute implementation,\n\
+                          - tracert6, a ICMPv6 Echo Request based traceroute,\n\
+                          - tcpspray6, a TCP/IP Discard/Echo bandwidth meter.
+homepage                  https://www.remlab.net/ndisc6/
+license                   GPL-2
+
+master_sites              https://www.remlab.net/files/ndisc6/
+distname                  ndisc6-${version}
+use_bzip2                 yes
+extract.suffix            .tar.bz2
+checksums                 rmd160 35dedcd7d8d12af7e39b82502fa8f7d2124b64f6 \
+                          sha256 0f41d6caf5f2edc1a12924956ae8b1d372e3b426bd7b11eed7d38bc974eec821
+depends_lib-append        port:gettext
+use_autoreconf            yes
+
+# Skip rdnssd since it can't be made to work on macOS, which doesn't get its DNS servers from resolv.conf
+# (macOS has built in RDNSS support anyway)
+patchfiles                patch-skip-rdnssd.diff
+
+configure.ldflags-append  -lintl
+configure.cppflags-append -D__APPLE_USE_RFC_3542
+
+# Uses variable-length arrays in structs, which is only supported by GCC
+compiler.whitelist        macports-gcc-8 macports-gcc-7 macports-gcc-6 macports-gcc-5 macports-gcc-4.9
